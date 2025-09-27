@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userID       Int      @id @unique @default(autoincrement())
+  firstName    String
+  lastName     String
+  emailID      String   @unique
+  phone        String   @unique
+  dateOfBirth  String
+  gender       String
+  address      String
+  city         String
+  state        String
+  country      String
+  postalCode   Int
+  userHeadline String
+  userSummary  String
+  skills       String
+  experience   Int
+  passwordHash String
+  profilePic   String
+
+  userDetails   UserDetails[]  // Connecting to userDetails table
+}
+
+
+model UserDetails {
+  userDetailsID                   Int       @id @default(autoincrement()) @unique
+  currentOrRecentjobRole          String? 
+  currentOrRecentjobCompany       String?
+  currentOrRecentstartDate        String?
+  currentOrRecentendDate          String?
+  currentOrRecentIsCurrent        Boolean   @default(false)
+  currentOrRecentdescription      String?
+
+  collegeName                     String?
+  degree                          String?
+  fieldOfStudy                    String?
+  endYear                         String?
+  gradeOrPercentage               String?
+
+  projectTitle                    String?
+  projectDescription              String?
+  technologiesUsed                String?
+  projectURL                      String?
+
+  website                         String?
+  github                          String?
+  linkedIn                        String?
+
+
+  // relation to User - one-to-one (each user -> one UserDetails)
+  user     User   @relation(fields: [userID], references: [userID])
+  userID   Int    @unique
+
+}
