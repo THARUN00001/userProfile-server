@@ -13,7 +13,7 @@ var router = express.Router();
 
 var app = express();
 
-app.set('view engine', 'ejs');
+
 
 
 

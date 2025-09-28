@@ -8,10 +8,10 @@ const Prisma = new PrismaClient().$extends(withAccelerate())
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 var router = express.Router();
-const ejs = require("ejs");
+
 var app = express();
 
-app.set('view engine', 'ejs');
+
 
 router.post("/", async function (req, res) {
 
